@@ -1,6 +1,6 @@
 import spacy
 import random
-from app.controller import blueprint,jsonify,request
+from app.controller import blueprint, jsonify, request
 from googletrans import Translator
 from googletrans import Translator
 import regex as re
@@ -9,30 +9,36 @@ import regex as re
 # print(re.search("(?P<url>https?://[^\s]+)", copy).group("url"))
 # for ent in doc.ents:
 #     print(ent.text, ent.start_char, ent.end_char, ent.label_)
+#
 
 def getBankName(sms):
     def dates():
-        l = ["2/3/2022","29/5/2022","1/6/2022"]
-        a = random.randint(0,len(l)-1)
+        l = ["2/3/2022", "29/5/2022", "1/6/2022"]
+        a = random.randint(0, len(l)-1)
         return l[a]
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(sms)
     dict = {}
-    # dict.update({"url   ":re.search("(?P<url>https?://[^\s]+)", sms).group("url")})
+    try:
+        dict.update({"url   ": re.search(
+            "(?P<url>https?://[^\s]+)", sms).group("url")})
+    except:
+        pass
     for ent in doc.ents:
         a = ent.text, ent.start_char, ent.end_char, ent.label_
-        for i in a :
-            dict.update({ent.label_:ent.text})
+        for i in a:
+            dict.update({ent.label_: ent.text})
             dict.update({"expiry_date": dates()})
     return dict
 
 
-@blueprint.route('/api/nlp',methods=["POST"])
+@blueprint.route('/api/nlp', methods=["POST"])
 def nlp():
-    sms=request.json['sms']
+    sms = request.json['sms']
     return jsonify(getBankName(sms))
 
-@blueprint.route('/api/translation',methods={"POST"})
+
+@blueprint.route('/api/translation', methods={"POST"})
 def translate():
     messages = request.json['messages']
     print(messages)
