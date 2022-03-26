@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const createHttpError = require("http-errors");
 const app = express();
-const cookieParser = require("cookie-parser");
 const morgan = require("morgan")
 
 const authRoutes = require("./routes/Auth.route");
@@ -15,7 +14,6 @@ const port = process.env.PORT || 8080;
 
 // middlewares
 app.use(express.json());
-app.use(cookieParser("secret"));
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: true }));
 app.use(

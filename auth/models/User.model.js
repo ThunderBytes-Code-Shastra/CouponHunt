@@ -17,8 +17,14 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  card: [
+    {
+      type: String,
+      bankName: String,
+      offer: [mongoose.SchemaTypes.ObjectId],
+    },
+  ],
 });
-
 
 const User = mongoose.model("user", UserSchema);
 
