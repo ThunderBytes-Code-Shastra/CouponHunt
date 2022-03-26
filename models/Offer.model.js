@@ -9,7 +9,7 @@ const OfferSchema = new mongoose.Schema(
     code: String,
     tnc: String,
     companyname: String,
-    img: Srting,
+    img: String,
     isDeal: Number,
     offerType: Number,
     offerValue: Number,
