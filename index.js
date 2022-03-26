@@ -6,6 +6,7 @@ const app = express();
 const morgan = require("morgan")
 
 const authRoutes = require("./routes/Auth.route");
+const offerNBankRoutes = require("./routes/OfferNBank.route");
 
 // database connection
 require("./configs/mongodb.config");
@@ -24,6 +25,7 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
+app.use("/api/bank-and-offer", offerNBankRoutes);
 
 app.get("/api/auth", (req, res) => {
   res.json({ message: "base url" });

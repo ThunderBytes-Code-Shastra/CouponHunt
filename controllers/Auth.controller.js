@@ -36,7 +36,7 @@ const register = async (req, res, next) => {
 
     const avatar = `https://ui-avatars.com/api/?background=random&name=${result.name}`;
 
-    const user = new User({...result, avatar});
+    const user = new User({ ...result, avatar });
     let savedUser = await user.save();
 
     const accessToken = await signJWT({ userId: savedUser._id });
@@ -46,13 +46,11 @@ const register = async (req, res, next) => {
     delete savedUser.password;
     delete savedUser._id;
 
-    return res
-      .status(201)
-      .json({
-        message: "Registered successfully",
-        user: savedUser,
-        accessToken
-      });
+    return res.status(201).json({
+      message: "Registered successfully",
+      user: savedUser,
+      accessToken,
+    });
   } catch (err) {
     if (err.isJoi === true) {
       console.log(err);
@@ -107,13 +105,11 @@ const login = async (req, res, next) => {
     delete user.password;
     delete user._id;
 
-    return res
-      .status(200)
-      .json({
-        message: "Login successfully",
-        user,
-        accessToken
-      });
+    return res.status(200).json({
+      message: "Login successfully",
+      user,
+      accessToken,
+    });
   } catch (err) {
     if (err.isJoi === true)
       return next(
