@@ -3,8 +3,11 @@ const Joi = require("joi");
 const loginSchema = Joi.object({
   username: Joi.string()
     .trim()
-    .pattern(/^[a-zA-Z0-9_@\.\-]+$/)
-    .required(),
+    .pattern(/^[a-zA-Z0-9_@\.\-]+$/),
+  email: Joi.string().trim().email(),
+  phone: Joi.string()
+    .trim()
+    .pattern(/^\d{10}$/),
   password: Joi.string()
     .trim()
     .pattern(/^[a-zA-Z0-9!@#%^&*+-=]{6,15}$/)
@@ -17,6 +20,10 @@ const registerSchema = Joi.object({
     .trim()
     .pattern(/^[a-zA-Z0-9_@\.\-]+$/)
     .required(),
+  email: Joi.string().trim().email(),
+  phone: Joi.string()
+    .trim()
+    .pattern(/^\d{10}$/),
   password: Joi.string()
     .trim()
     .pattern(/^[a-zA-Z0-9!@#%^&*+-=]{6,15}$/)

@@ -23,18 +23,35 @@ const register = async (req, res, next) => {
   try {
     let result = await registerSchema.validateAsync(req.body);
 
-    const existingUser = await User.findOne({ username: result.username });
+    const existingUser = await User.findOne({
+      $or: [
+        { username: result.username },
+        { phone: result.phone },
+        { email: result.email },
+      ],
+    });
 
     if (existingUser) {
-      throw createHttpError.Conflict(
-        `${result.username} is already been registered`
-      );
+      if (existingUser.username === result.username)
+        throw createHttpError.Conflict(
+          `${result.username} is already been registered`
+        );
+
+      if (existingUser.phone === result.phone)
+        throw createHttpError.Conflict(
+          `${result.phone} is already been registered`
+        );
+
+      if (existingUser.email === result.email)
+        throw createHttpError.Conflict(
+          `${result.email} is already been registered`
+        );
     }
 
     const salt = await bcrypt.genSalt(10);
     result["password"] = await bcrypt.hash(result.password, salt);
 
-    const avatar = `https://ui-avatars.com/api/?background=random&name=${result.name}`;
+    const avatar = `https://ui-avatars.com/api/?background=random&name=${result.name}&size=128&format=svg`;
 
     const user = new User({ ...result, avatar });
     let savedUser = await user.save();
@@ -89,7 +106,13 @@ const login = async (req, res, next) => {
   try {
     const result = await loginSchema.validateAsync(req.body);
 
-    let user = await User.findOne({ username: result.username });
+    let user = await User.findOne({
+      $or: [
+        { username: result.username },
+        { phone: result.phone },
+        { email: result.email },
+      ],
+    });
 
     if (!user) throw createHttpError.NotFound("User not registerd");
 
