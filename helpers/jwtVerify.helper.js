@@ -6,14 +6,18 @@ const PRIV_KEY = fs.readFileSync(PATH_TO_PRIV, "utf8");
 const verifyJWT = async (accessToken) => {
   return new Promise((resolve, reject) => {
     if (accessToken)
-      jsonwebtoken.verify(accessToken, PRIV_KEY, (error, payload) => {
-        if (error) {
-          reject(error);
+      jsonwebtoken.verify(
+        accessToken,
+        process.env.PRIVATE_KEY.replace(/\\n/g, "\n"),
+        (error, payload) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+          resolve(payload);
           return;
         }
-        resolve(payload);
-        return;
-      });
+      );
     else reject("Access Token not provided");
   });
 };

@@ -1,7 +1,4 @@
 const jsonwebtoken = require("jsonwebtoken");
-const fs = require("fs");
-const PATH_TO_PUB = __dirname + "/../private.pem";
-const PUB_KEY = fs.readFileSync(PATH_TO_PUB, "utf8");
 
 const expiresIn = process.env.EXPIRATION_TIME;
 
@@ -10,7 +7,7 @@ const signJWT = async (payload) => {
     if (payload?.userId) {
       jsonwebtoken.sign(
         payload,
-        PUB_KEY,
+        process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
         { expiresIn: expiresIn },
         (error, signedToken) => {
           if (error) {
