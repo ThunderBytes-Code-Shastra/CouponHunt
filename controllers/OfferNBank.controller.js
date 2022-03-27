@@ -17,18 +17,9 @@ const viewBanks = async (req, res, next) => {
 
 const viewOffers = async (req, res, next) => {
   try {
-    const { filter, limit, bankName } = req.query;
-
+    const { limit, bankName, cardType } = req.query;
     let offers;
-
-    let params = {};
-
-    if(bankName)
-    params[bankName] = { $regex: ".*" + bankName + ".*" }
-
-    if (!filter)
-      offers = await Offer.find(params).limit(limit ?? 25);
-
+    offers = await Offer.find({ "bankName": bankName, "cardType": cardType }).limit(limit ?? 25);
     res.status(200).json({ data: offers });
   } catch (err) {
     next(err);
