@@ -1,0 +1,16 @@
+export default Colors = {
+  primary: "white",
+  // primary: "#EDE5D6",
+  primaryLight: "#F7F4ED",
+  // secondary: "#B86643",
+  secondary: "#00095C",
+  tab1Secondary: "#000533",
+  tab2Secondary: "#00095C",
+  tab3Secondary: "#000a66",
+  tab4Secondary: "#000d80",
+  tab5Secondary: "#0012b3",
+  secondaryDark: "#965336",
+  background: "#F6F9FF",
+  error: "red",
+  inactiveTabColor: "#B9B9B9",
+};
