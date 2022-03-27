@@ -14,4 +14,4 @@ services:
     build: ./nlp
     restart: always
     ports:
-      - "8081:5000"
+      - "8082:5000"
