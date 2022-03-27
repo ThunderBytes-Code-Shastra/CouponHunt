@@ -7,7 +7,7 @@ const signJWT = async (payload) => {
     if (payload?.userId) {
       jsonwebtoken.sign(
         payload,
-        process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+        process.env.PRIVATE_KEY,
         { expiresIn: expiresIn },
         (error, signedToken) => {
           if (error) {

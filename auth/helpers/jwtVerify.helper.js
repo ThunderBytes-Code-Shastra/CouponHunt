@@ -5,7 +5,7 @@ const verifyJWT = async (accessToken) => {
     if (accessToken)
       jsonwebtoken.verify(
         accessToken,
-        process.env.PRIVATE_KEY.replace(/\\n/g, "\n"),
+        process.env.PRIVATE_KEY,
         (error, payload) => {
           if (error) {
             reject(error);

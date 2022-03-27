@@ -78,6 +78,8 @@ const register = async (req, res, next) => {
     if (err.code === 11000) {
       return next(createHttpError.Conflict(err.name));
     }
+    console.log(err)
+
 
     next(err);
   }
@@ -138,6 +140,7 @@ const login = async (req, res, next) => {
       return next(
         createHttpError.UnprocessableEntity("Invalid Username/Password")
       );
+      console.log(err)
 
     next(err);
   }
