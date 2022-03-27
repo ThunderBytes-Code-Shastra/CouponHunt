@@ -18,7 +18,7 @@ def getBankName(sms):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(sms)
     dict = {}
-    dict.update({"url":re.search("(?P<url>https?://[^\s]+)", sms).group("url")})
+    # dict.update({"url   ":re.search("(?P<url>https?://[^\s]+)", sms).group("url")})
     for ent in doc.ents:
         a = ent.text, ent.start_char, ent.end_char, ent.label_
         for i in a :
