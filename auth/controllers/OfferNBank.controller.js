@@ -20,14 +20,14 @@ const viewOffers = async (req, res, next) => {
     const { limit, bankName, cardType } = req.query;
     let offers;
     console.log(req.query)
-    if(bankName && cardType)
-      offers = await Offer.find({"bankName":bankName, "cardType": cardType }).limit(limit??25)
-    else if(bankName)
-      offers = await Offer.find({"bankName":bankName}).limit(limit??25)
-    else if(cardType)
-      offers = await Offer.find({"cardType": cardType }).limit(limit??25)
+    if (bankName && cardType)
+      offers = await Offer.find({ "bankName": bankName, "cardType": { $in: [cardType, 'Credit & Debit Cards'] } }).limit(limit ?? 25)
+    else if (bankName)
+      offers = await Offer.find({ "bankName": bankName }).limit(limit ?? 25)
+    else if (cardType)
+      offers = await Offer.find({ "cardType": { $in: [cardType, 'Credit & Debit Cards'] } }).limit(limit ?? 25)
     else
-      offers = await Offer.find().limit(limit??25)
+      offers = await Offer.find().limit(limit ?? 25)
 
     res.status(200).json({ data: offers });
   } catch (err) {
