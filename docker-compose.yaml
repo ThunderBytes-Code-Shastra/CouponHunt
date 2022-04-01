@@ -1,0 +1,18 @@
+version: '3.0'
+
+services:
+  auth:
+    build: ./auth
+    restart: always
+    ports:
+      - "8081:8080"
+    environment:
+      - MONGO_URI=mongodb+srv://bankco:bankco2022@cluster0.3eyap.mongodb.net/mainDB?retryWrites=true&w=majority
+      - EXPIRATION_TIME=2617920000
+      - PRIVATE_KEY=-----BEGIN RSA PRIVATE KEY-----MIIEogIBAAKCAQEAhFZMpwIg7aTpxsvUg58ylZ+AHhX949PCeUwhQNOpX+sXbnFBb48qEAiHX1Uf75/335sBBmQGX/QYekWSmAsvddvWF63yJlX6KxDvLNcMByb4HVz4WdvZ5AQJSqij+3kkBUOjn0qlGwiSisuDnQkwY6yivqcbnPScxJXXv8d+ZbpVbOybkAVlFleuJSrYtzjXAY+G8RaR9cVrTQkGnMzI2HJQCZqfdXhM6qaJkyNAtksjst1SVwfR4atdB8WRmCBGesraxylEbTWKcuAlBGdrgnqvWRAQN5RKZc4lbgzFXDX5qv6h/OC8/P+TrGHHc+8NYrXE/mELudzsJuIp6NuPcQIDAQABAoIBAH8b9Rwkq0QXNoQ/m6ug6ZFVVlWPggGmkBC50ubVZsY+pI7sMZHZzOkBiCVFOhuLZyZbV6yvvn/DkQ9AbAGmHLvzn7u20/OGeXeMGG7VTzQ/demeNtz4kly0k8gmGvub68EyqqKBq/w/S6IMwCnBfbz/QIInOBqVyU35LvWBxCIoaNT0tjPt1Yp5Z1qr1x7WYuUiMOA3O6bB7gJqvWvXlv2HsfSJLt3uAmG1wBerxZ7+YaIuE3rvK1ZTmxf1sn3Q9BpwaakEE66lxXtdlczuxIMvBX5uqo18mfwhuDLiOw7W5p7vXOr7bc1+NdoQhJ4K+qmk48KbHtLY32crIWgt2AECgYEAx2g2QPtmLu10no3s9IyRsueGJ8MnvHVPcIelq7lIf/YQBLdKESV/OyDZr3iymJWykt+InpjoCBLUAXoELJgpC3YqTkisjZxbKLCjijxEtrZ0C+KWAQ8NqyLD4Sof0HNI2ngoOjLsTIiZV3B81OVAP+ck6o+wVa77SVjEr9FRsRECgYEAqeUp3z0SFf9xIgV9Oq6Xc8PdIfBs7FEdxk6qZTlrtZxsWX1QGlRYZSjqRbj7jwxLU1lHHLIf0++8+38ckDVCjpo4Ur0w32h95rUhBtHP9uIq8dEiY+UA24NpUNJBZJCebjfW/dzCL6RCCwH5Bt1rLR28wNRdtYOSB8r/bb9v+GECgYBg4BkTgs9G1yfD69GFkVEraF19rcr9PMTGN7Bd+Brnx8RKdj1ujRf9wtze6bVieb+SqTR3UHPRkEwdF4k1nQq7vcGZ3Kav+Zkz8HTTMKp1VbiVGZSkmQqb7LzbBBsGqytmr99jPuAb4nUUzNpol6OaKBKAPiR9zA/at1x+yiN08QKBgDWMNRZXeUvVpyLB+CZ2wOWL5ja8QJh7OJc4VBxzbK9hDgVmqciirPm1W6F+HEuJ5HPwv6kbu0xhU38xIR+SqdeoY/gwCSdhF82PaUls988omcB92gkCNLL7SEZg/ptjuYujre91lP7PFsHBbWvsfctKhCOCy8ZaIbyzDq7Yl8IBAoGAOLwLFoAagJd4Ttpns6agxqAJPwYpO9KYUD+bVwPJ+5lxAfwu3VSwYgDZOYOoyEVeJCi0ve4sPQ6dHxUot9yEhZfB0o6rckGkQYmYIRz4gYP0cRNXNasUOGh/IF5qI3uoja1q1PxwFWOSSa906qWBCKILfNpiyJBu7v8UCMuRcJY=-----END RSA PRIVATE KEY-----
+
+
+networks:
+  web:
+    driver: bridge
+  mainnet:
